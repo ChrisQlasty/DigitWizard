@@ -2,8 +2,19 @@
 Demo application enabling real time recognition of digits drawn utilizing Intel RealSense F200 Depth camera thanks to Keras and TensorFlowSharp.
 
 
+### Overview
+
+### Usage
+* **Drawing:** user can draw digits on the canvas utilizing mouse or by performing a gestures in the air when F200 depth camera is turned on. All shapes (digits) have to be drawn with one curve only.
+* **Cleaning the canvas:** each attempt to draw new shape cleares the canvas. Also a waving hand gesture clears it.
+* **See the results:** after a sketch is completed, it is resized and given as input to the CNN model and bar chart indicating the percentage of recognition certainity for given digit is drawn under the canvas.
+
+| Good sign recognized |  Bad sign - confused model |
+|----------------|----------------|
+| <p align="center"><img src="./src/good_example.png"></p> | <p align="center"><img src="./src/bad_example.png"></p>  |
+
 ### Requirements & remarks
-* I was testing this solution with **RealSense F200 depth camera**, built-in within my laptop
+* The solution was tested with **RealSense F200 depth camera**
 * **TensorflowSharp 1.7.0** package needs to be installed from _nuget_ (I didn't put it to repo as it weights +200MB)
 
 ### References
