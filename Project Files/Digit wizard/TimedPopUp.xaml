@@ -1,0 +1,27 @@
+﻿<Window x:Class="FF_TouchlessControllerViewer.cs.TimedPopUp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="TimedPopUp" Height="70.8" Width="250.4" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closing="Window_Closing" WindowStyle="None" Opacity="0.8" AllowsTransparency="True" SizeToContent="WidthAndHeight" Cursor="Wait">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="White" Offset="1"/>
+            <GradientStop Color="#FFE2EDFF"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Window.Triggers>
+    <EventTrigger RoutedEvent="Window.Loaded" >
+        <EventTrigger.Actions>
+            <BeginStoryboard>
+                <Storyboard TargetProperty="Left">
+                    <DoubleAnimation From="600" To="615" Duration="0:0:0.05"
+                                     AutoReverse="True" RepeatBehavior="5x"
+                                     FillBehavior="Stop"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger.Actions>
+    </EventTrigger>
+</Window.Triggers>
+    <Grid>
+        <TextBox x:Name="PopUpTextBoxText" TextWrapping="Wrap" Text="Pop Up!" Background="Transparent" IsEnabled="False" FontSize="36" FontFamily="Kristen ITC" TextAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsUndoEnabled="True" IsReadOnly="True"/>
+    </Grid>
+</Window>

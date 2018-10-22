@@ -1,0 +1,100 @@
+﻿<Window x:Name="MainWindow1" x:Class="FF_TouchlessControllerViewer.cs.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:realSenseNavigator="clr-namespace:RealSenseNavigator;assembly=touchlesscontroller_visualfeedback"
+        Title="Digit wizards" Height="800" Width="1607"
+        Closing="MainWindow_Closing" MaxWidth="2500" MaxHeight="1500" MinHeight="540" MinWidth="1000" WindowState="Maximized">
+    <Window.Background>
+        <RadialGradientBrush SpreadMethod="Reflect">
+            <GradientStop Color="#FF1285FF" Offset="1"/>
+            <GradientStop Color="#FF2783E5" Offset="0.487"/>
+            <GradientStop Color="#FF4BA2FF"/>
+            <GradientStop Color="#FF2A8AF0" Offset="0.724"/>
+            <GradientStop Color="#FF328BE8" Offset="0.207"/>
+        </RadialGradientBrush>
+    </Window.Background>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/touchlesscontroller_visualfeedback;component/TouchlessController.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid 
+        Name="VisualFeedbackGrid" 
+        Margin="0,0,-0.4,0"       
+        MouseMove="VisualFeedbackGrid_OnMouseMove">
+ 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+
+
+        <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"
+            x:Name ="GestureLoggingTextBox" 
+            Margin="0,0,0,0"
+            TextWrapping="Wrap"
+            Text="Gesture:"           
+            IsReadOnly="True" />
+        
+        <Canvas x:Name="digitCanvas" HorizontalAlignment="Left" Height="700" Margin="610,50,0,0" VerticalAlignment="Top" Width="700" Background="White" RenderTransformOrigin="-2.8,-0.96" MouseDown="Canvas_MouseDown" MouseMove="digitCanvas_MouseMove" MouseUp="digitCanvas_MouseUp"/>
+        <realSenseNavigator:CursorDisplay  x:Name="handCursor" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"  Grid.ColumnSpan="3" IsHitTestVisible="False">
+        </realSenseNavigator:CursorDisplay>
+        <realSenseNavigator:AlertsDisplay x:Name="alertsDisplay" IsHitTestVisible="False" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" Grid.RowSpan="1" Grid.ColumnSpan="1" Focusable="True" Grid.Column="1"/>
+        <realSenseNavigator:OutOfWindowBorder x:Name="outOfScreenBorder" Loaded="outOfScreenBorder_Loaded"/>
+
+
+        <ItemsControl ItemsSource="{Binding}" Margin="0,0,0,-130" HorizontalAlignment="Center">
+
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"></StackPanel>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="10,10,10,80" VerticalAlignment="Bottom">
+                        <Border Name="br" Margin="3,10,3,10"  CornerRadius="5" 
+                                Background="{Binding Color}"
+                                Width="160" BorderBrush="{Binding Color}"  
+                                BorderThickness="3" 
+                                Height="{Binding Data}">
+                            <Border.Triggers>
+                                <EventTrigger RoutedEvent="Border.Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation From="0"  
+                                                             Storyboard.TargetName="br" 
+                                 Storyboard.TargetProperty="(FrameworkElement.Height)" 
+                                                              Duration="0:0:00.5">
+
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Border.Triggers>
+                        </Border>
+                        <TextBlock HorizontalAlignment="Center" FontWeight="Bold" Foreground="{Binding Color}"
+                                   FontFamily="Latha" Text="{Binding AccurateVal}" FontSize="45">
+                            <TextBlock.RenderTransform>
+                                <TranslateTransform Y="{Binding Label_position}"/>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <TextBlock HorizontalAlignment="Center"
+                                   FontWeight="Bold" FontFamily="Latha" 
+                                   Text="{Binding Name}" FontSize="80">
+                            <TextBlock.RenderTransform>
+                                <TranslateTransform Y="-75"/>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+
+        </ItemsControl>
+    </Grid>
+</Window>
