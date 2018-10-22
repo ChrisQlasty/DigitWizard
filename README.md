@@ -10,7 +10,7 @@ Demo application enabling real time recognition of digits drawn utilizing Intel 
 * **Cleaning the canvas:** each attempt to draw new shape cleares the canvas. Also a waving hand gesture clears it.
 * **See the results:** after a sketch is completed, it is resized and given as input to the CNN model and bar chart indicating the percentage of recognition certainity for given digit is drawn under the canvas.
 
-| Good sign recognized |  Bad sign - confused model |
+| Good sign recognized |  Bad sign - model is confused |
 |----------------|----------------|
 | <p align="center"><img src="./src/good_example.png"></p> | <p align="center"><img src="./src/bad_example.png"></p>  |
 
