@@ -3,9 +3,10 @@ Demo application enabling real time recognition of digits drawn utilizing Intel 
 
 
 ### Overview
+<p align="center"><img src="./src/overview.png"></p>
 
 ### Usage
-* **Drawing:** user can draw digits on the canvas utilizing mouse or by performing a gestures in the air when F200 depth camera is turned on. All shapes (digits) have to be drawn with one curve only.
+* **Drawing:** user can draw digits on the canvas utilizing mouse or by performing a gestures in the air when F200 depth camera is turned on. In order to start drawing with a hand, fist has to close. All shapes (digits) have to be drawn with one curve only.
 * **Cleaning the canvas:** each attempt to draw new shape cleares the canvas. Also a waving hand gesture clears it.
 * **See the results:** after a sketch is completed, it is resized and given as input to the CNN model and bar chart indicating the percentage of recognition certainity for given digit is drawn under the canvas.
 
