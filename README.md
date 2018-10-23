@@ -1,5 +1,5 @@
 # DigitWizard
-Hand gesture recognition based on Intel RealSense API makes a lot of fun. In this app it was used to draw sketches on the canvas. Sketches drawn are given as input to the CNN model, trained to recognize handwritten digits.
+Hand gesture recognition based on Intel RealSense API makes a lot of fun. In this app it was used to draw sketches on the canvas. Sketches drawn are given as input to the CNN model, trained to recognize handwritten digits. Watch **[this YT video](https://www.youtube.com/watch?v=Jj1jtxOkz2A&list=PL7O2QC3VBSZ2cHDJ8h-QumI3nmG9e7iEM&index=3)** to see how it works.
 
 ### Overview
 Ths application was built utilizing the core of *Touchless Controller Viewer* sample from the Intel RealSense SDK [[1]](http://registrationcenter.intel.com/irc_nas/9078/release_notes_realsense_sdk_2016_r2.pdf). <br>In this modification by dragging a mouse or by moving a closed fist one can draw on the canvas. After mouse button is released or hand fist is opened a drawn sketch is resized to 28x28 px picture. It can be then given as input to a Convolutional Neural Network model, which was trained on the MNIST dataset [[2]](https://github.com/keras-team/keras/blob/master/examples/mnist_cnn.py). The trained model was frozen [[3]](https://stackoverflow.com/questions/45466020/how-to-export-keras-h5-to-tensorflow-pb/45466355#45466355) and loaded within C# app thanks to the TensorFlowSharp [[4]](https://github.com/migueldeicaza/TensorFlowSharp). In order to present the CNN model output, modification of the smart bar charts solution [[5]](http://dotnetvisio.blogspot.com/2013/08/wpf-create-custom-bar-chart-using-grid.html) was applied. 
@@ -11,9 +11,9 @@ Ths application was built utilizing the core of *Touchless Controller Viewer* sa
 * **Cleaning the canvas:** each attempt to draw new shape cleares the canvas. Also a waving hand gesture clears it.
 * **See the results:** after a sketch is completed, it is resized and given as input to the CNN model and bar chart indicating the percentage of recognition certainity for given digit is drawn under the canvas.
 
-| Good sign recognized |  Bad sign - model is confused |
+| Bad usage - that is not a digit! | Good usage example |
 |----------------|----------------|
-| <p align="center"><img src="./src/good_example.png"></p> | <p align="center"><img src="./src/bad_example.png"></p>  |
+| <img src="./src/bad_example.png" height="232px"> | <img src="./src/DigWiz.gif" height="232px"> |
 
 ### Loading data to CNN model in TensorFlowSharp
 ```cs
