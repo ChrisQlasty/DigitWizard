@@ -424,6 +424,8 @@ namespace FF_TouchlessControllerViewer.cs
             currentPoint = _point;
             clickStatus = true;
 
+            digitCanvas.Children.Clear();
+
             System.Windows.Shapes.Rectangle rect = new System.Windows.Shapes.Rectangle();
             rect.Stroke = System.Windows.Media.Brushes.PapayaWhip;
             rect.StrokeThickness = 2;
