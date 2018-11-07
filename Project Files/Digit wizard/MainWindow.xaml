@@ -67,7 +67,7 @@
                                 <EventTrigger RoutedEvent="Border.Loaded">
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation From="0"  
+                                            <DoubleAnimation From="{Binding PrevAccurateVal}"  
                                                              Storyboard.TargetName="br" 
                                  Storyboard.TargetProperty="(FrameworkElement.Height)" 
                                                               Duration="0:0:00.5">

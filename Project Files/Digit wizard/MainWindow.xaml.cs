@@ -361,6 +361,14 @@ namespace FF_TouchlessControllerViewer.cs
             digitCanvas.Children.Clear();
             var popUp = new TimedPopUp("Touchless Controller", "Nice Wave!", new TimeSpan(0, 0, 2));
             popUp.Show();
+
+            for (int i = 0; i < 10; i++)
+            {
+                _bar[i].PrevVal = _bar[i].Value;
+                _bar[i].Value = 0;
+                _bar[i].AccVal = String.Format("{0:0.0}%", 0);
+            }
+            this.DataContext = new RecordCollection(_bar);
         }
 
         //private void OnBack()
@@ -420,7 +428,7 @@ namespace FF_TouchlessControllerViewer.cs
         }
 
         public void Interaction_Down(Point _point)
-        {            
+        {          
             currentPoint = _point;
             clickStatus = true;
 
@@ -513,7 +521,8 @@ namespace FF_TouchlessControllerViewer.cs
                 for (int i = 0; i < re.Length; i++)
                 {
                     Console.WriteLine(re[0, i]);
-                    _bar[i].Value = (int)(100 * re[0, i]);
+                    _bar[i].PrevVal = _bar[i].Value;
+                    _bar[i].Value = (int)(100 * re[0, i]);                    
                     _bar[i].AccVal = String.Format("{0:0.0}%", 100 * re[0, i]);
                 }
                 this.DataContext = new RecordCollection(_bar);
@@ -538,6 +547,7 @@ namespace FF_TouchlessControllerViewer.cs
         public string BarName { set; get; }
         public int Value { set; get; }
         public string AccVal { set; get; }
+        public int PrevVal { set; get; }
     }
 
     class RecordCollection : ObservableCollection<Record>
@@ -546,7 +556,7 @@ namespace FF_TouchlessControllerViewer.cs
         {
             foreach (Bar barval in barvalues)
             {                
-                Add(new Record(barval.Value, barval.AccVal, barval.BarName));
+                Add(new Record(barval.Value, barval.AccVal, barval.BarName, barval.PrevVal));
             }
         }
 
@@ -607,12 +617,27 @@ namespace FF_TouchlessControllerViewer.cs
             }
         }
 
+
+        private int _prevaccurateVal;
+        public int PrevAccurateVal
+        {
+            set
+            {
+                _prevaccurateVal = value;
+            }
+            get
+            {
+                return _prevaccurateVal;
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Record(int value, string av, string name)
+        public Record(int value, string av, string name, int prevv)
         {
             Data = value;
             AccurateVal = av;
+            PrevAccurateVal = prevv;
             Color = _color;
             Name = name;
             Label_position = -value-65;
